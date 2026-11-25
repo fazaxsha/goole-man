@@ -1,0 +1,17 @@
+{
+  "name": "chrome-profile-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Dashboard lokal untuk inventaris, bersih-bersih, dan arsip profil Chrome",
+  "engines": {
+    "node": ">=23.4"
+  },
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node server/index.js"
+  },
+  "dependencies": {
+    "classic-level": "^3.0.0"
+  }
+}

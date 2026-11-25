@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Profile Dock — Chrome</title>
+<link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4" width="19" height="13" rx="2.5"/><path d="M2.5 8.5h19"/><circle cx="5.4" cy="6.2" r=".8" fill="currentColor" stroke="none"/><path d="M8 20.5h8"/></svg>
+      <div class="brand-text">
+        <h1>Profile Dock</h1>
+        <p>Inventaris, bersih-bersih, dan arsip profil Chrome</p>
+      </div>
+    </div>
+    <form class="rootform" id="rootForm" autocomplete="off">
+      <input id="rootInput" spellcheck="false" placeholder="C:\Users\kamu\AppData\Local\Google\Chrome\User Data" aria-label="Folder profil Chrome" />
+      <button class="btn primary" type="submit">Simpan</button>
+      <button class="btn" id="scanBtn" type="button">Scan</button>
+    </form>
+  </header>
+
+  <section class="statbar" id="statbar">
+    <div class="stat"><span class="stat-label">Profil</span><strong id="statCount">—</strong></div>
+    <div class="stat"><span class="stat-label">Total</span><strong id="statTotal">—</strong></div>
+    <div class="stat accent"><span class="stat-label">Cache bisa dibuang</span><strong id="statCache">—</strong></div>
+    <div class="stat"><span class="stat-label">Data situs</span><strong id="statSite">—</strong></div>
+    <div class="stat"><span class="stat-label">Extension</span><strong id="statExt">—</strong></div>
+    <div class="spacer"></div>
+    <div class="stat-note" id="scanStatus"></div>
+    <button class="btn ghost small" id="trashBtn" type="button">Sampah</button>
+  </section>
+
+  <section class="controls">
+    <div class="searchwrap">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+      <input id="search" type="search" placeholder="Cari nama profil atau path…" aria-label="Cari profil" />
+    </div>
+    <select id="sort" aria-label="Urutkan">
+      <option value="size">Ukuran terbesar</option>
+      <option value="cache">Cache terbesar</option>
+      <option value="site">Data situs terbesar</option>
+      <option value="recent">Terakhir dipakai</option>
+      <option value="name">Nama A–Z</option>
+    </select>
+    <label class="chk"><input type="checkbox" id="onlyLocked" /> Terkunci saja</label>
+    <div class="spacer"></div>
+    <span class="count" id="viewCount"></span>
+    <button class="btn ghost small" id="selectAll" type="button">Pilih semua</button>
+  </section>
+
+  <main class="grid-wrap" id="gridWrap">
+    <div class="grid-spacer" id="gridSpacer"></div>
+    <div class="grid" id="grid"></div>
+    <div class="empty hidden" id="empty"></div>
+  </main>
+
+  <div class="bulkbar hidden" id="bulkbar">
+    <span id="bulkText">0 dipilih</span>
+    <button class="btn primary small" id="bulkCache" type="button">Bersihkan cache</button>
+    <button class="btn small" id="bulkArchive" type="button">Arsipkan</button>
+    <button class="btn ghost small" id="bulkClear" type="button">Batal</button>
+  </div>
+
+  <div class="scrim hidden" id="scrim"></div>
+
+  <aside class="drawer hidden" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <header class="drawer-head">
+      <div>
+        <h2 id="drawerTitle">—</h2>
+        <p class="mono small muted" id="drawerPath">—</p>
+      </div>
+      <button class="iconbtn" id="drawerClose" type="button" aria-label="Tutup">
+        <svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
+    </header>
+    <div class="drawer-body" id="drawerBody"></div>
+  </aside>
+
+  <div class="modal hidden" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <h2 id="modalTitle">Konfirmasi</h2>
+      <div class="modal-body" id="modalBody"></div>
+      <footer class="modal-foot">
+        <button class="btn ghost" id="modalCancel" type="button">Batal</button>
+        <button class="btn danger" id="modalOk" type="button">Lanjutkan</button>
+      </footer>
+    </div>
+  </div>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
